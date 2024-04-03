@@ -1,8 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit'
+import wordlist from '../words.json'
 
 type InitialState = {
     dataBoard: string[],
     curPos: number,
+    curPosMin: number,
+    curPosMax: number,
+    keyWord: string,
 }
 
 const initialState:InitialState = {
@@ -15,6 +19,9 @@ const initialState:InitialState = {
         '', '', '', '', '', 
     ],
     curPos: 0,
+    curPosMin: 0,
+    curPosMax: 4,
+    keyWord: wordlist.words[Math.round(Math.random() * (wordlist.words.length - 1))].toUpperCase(),
 }
 
 export const boardSlice = createSlice({
@@ -22,31 +29,19 @@ export const boardSlice = createSlice({
     initialState,
     reducers: {
         setDataBoard: (state, action) => {
-            // const currentIndex = state.dataBoard.indexOf('')
-            // const value = action.payload
-            
-            // if (value === 'Back') {
-            //     if (currentIndex === -1) {
-            //         state.dataBoard[state.dataBoard.length - 1] = ''
-            //     } else {
-            //         state.dataBoard[currentIndex - 1] = ''
-            //     }
-            // } else if (value === 'Enter') {
-            //     console.log('enter')
-            // } else {
-            //     if (currentIndex <= state.dataBoard.length - 1 && currentIndex !== -1) {
-            //         state.dataBoard[currentIndex] = value
-            //     }
-            // }
             state.dataBoard = action.payload
         },
         setNextCurPos: (state) => {
-            state.curPos++;
+            state.curPos++
         },
         setPrevCurPos: (state) => {
-            state.curPos--;
+            state.curPos--
+        },
+        setRange: (state) => {
+            state.curPosMin += 5
+            state.curPosMax += 5
         }
     }
 })
 
-export const { setDataBoard, setNextCurPos, setPrevCurPos } = boardSlice.actions
+export const { setDataBoard, setNextCurPos, setPrevCurPos, setRange } = boardSlice.actions

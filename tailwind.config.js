@@ -6,7 +6,23 @@ module.exports = {
     fontFamily: {
       sans: ['"Poppins"', 'sans-serif']
     },
-    extend: {},
+    extend: {
+      animation: {
+        flip: 'flip 1s linear'
+      },
+      keyframes: {
+        flip: {
+          '0%': {
+            transform: 'rotateX(0)'
+          },
+          '100%': {
+            transform: 'rotateX(360deg)'
+          }
+        }
+      }
+
+
+    },
   },
   
   plugins: [],
